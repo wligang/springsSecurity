@@ -16,29 +16,30 @@ import com.cloud.service.UserService;
 
 @Controller
 public class UserController {
-	@Autowired
-	private UserService userService;
-	
-	@RequestMapping("/findAll")
-	@ResponseBody
-	public List<User> findAll(){
-		List<User> list =userService.findAll();
-		return list;
-	}
-	
-/*	@RequestMapping("/")
-	public String index(Model model){
-		User user = new User();
-		 model.addAttribute("user",user);
-		return "index";
-	}*/
-	
-	@RequestMapping("/register")
-	public String register(HttpServletRequest request){
-		String name = request.getParameter("name");
-		String password = request.getParameter("password");
-		User user = new User(name,password);
-		userService.save(user);
-		return "success";
-	}
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/findAll")
+    @ResponseBody
+    public List<User> findAll() {
+        List<User> list = userService.findAll();
+        return list;
+    }
+
+    @RequestMapping("/index")
+    public String index(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "html/index";
+    }
+
+    @RequestMapping("/register")
+    public String register(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        String password = request.getParameter("password");
+        User user = new User(name, password);
+        userService.save(user);
+        return "success";
+    }
+
 }
